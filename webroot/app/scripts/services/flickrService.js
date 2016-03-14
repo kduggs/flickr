@@ -13,7 +13,7 @@ app.factory('FlickrService',['$http',function($http){
 	FlickrService.prototype.loadPage = function(page) {
 		this.page = page;
 
-		var url = "http://localhost/flickr/gallery.json?page" + this.page;
+		var url = "/gallery.json?page" + this.page;
 		
 		if ( this.tag ) {
 			url += '&tag=' + this.tag;
