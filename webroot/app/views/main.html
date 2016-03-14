@@ -1,0 +1,20 @@
+<div ng-controller="GalleryCtrl as galleryCtrl" class="gallery row" infinite-scroll="galleryCtrl.loadPage()" infinite-scroll-distance="2" infinite-scroll-disabled="galleryCtrl.pages && galleryCtrl.pages <= galleryCtrlpage">
+
+    <h1>Flickr photos<span ng-show='galleryCtrl.tag' class="badge">{{galleryCtrl.tag}}<a ng-click="galleryCtrl.cleartag(tag)"><i class="remove glyphicon glyphicon-remove"></i></a></span></h1>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6" ng-repeat="photo in galleryCtrl.photos">
+	<div class="thumbnail">
+	    <a href="{{photo.url_original}}" target="_blank">
+		<img ng-src="{{photo.url_thumb}}">
+	    </a>
+
+	    <div class="caption">
+		<a href="{{photo.url_original}}" target="_blank" title="{{photo.title}}">{{photo.title | limitTo: 30 }}{{photo.title.length > 30 ? '...' : ''}}</a> by <a href="{{photo.url_profile}}">{{photo.ownername}}</a>
+		<div class="caption-sub" ng-show="photo.description" >Description: {{ photo.description | limitTo: 40 }}<a class="tip" ng-show="photo.description.length > 40" uib-popover="{{photo.description}}" popover-placement="top"><i class="glyphicon glyphicon-info-sign"></i></a></div>
+		<div class="caption-sub" ng-show="photo.tags">Tags: <a class="tag" ng-click="galleryCtrl.searchtag(tag)" ng-repeat="tag in photo.tags">{{tag}}{{$last ? '' : ', '}}</a></div>
+	    </div>
+	</div>
+    </div>
+    <div ng-show='galleryCtrl.loading' class="col-lg-12 col-xs-12 well">Loading photos, hold on...</div>
+</div>
+
